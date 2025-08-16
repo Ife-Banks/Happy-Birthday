@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const CakeWithSoundDetection = () => {
@@ -159,9 +159,24 @@ const CakeWithSoundDetection = () => {
     }
   };
 
+  const [displayText, setDisplayText] = useState('');
+  const fullText = 'Blow out the candle';
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (currentIndex < fullText.length) {
+      const timeout = setTimeout(() => {
+        setDisplayText(prev => prev + fullText[currentIndex]);
+        setCurrentIndex(prev => prev + 1);
+      }, 100); // Adjust typing speed (milliseconds)
+      
+      return () => clearTimeout(timeout);
+    }
+  }, [currentIndex]);
+
   return (
     <div className='bro'>
-      <h1 className='text'>Blow out the candle</h1>
+      <h1 className='text'>{displayText}</h1>
       <div className="cake">
         
         <div className="plate"></div>

@@ -53,11 +53,11 @@
       #FFE645 50%,
       #FF1493 75%,
       #00C7DB 100%);
-          background-blend-mode: overlay, screen, normal, normal;
-            animation: gradientShift 15s ease infinite alternate;
-            border-radius: 15px;
-            position: relative;
-            overflow: hidden;
+        background-blend-mode: overlay, screen, normal, normal;
+        animation: gradientShift 15s ease infinite alternate;
+        border-radius: 15px;
+        position: relative;
+        overflow: hidden;
         }
 
 

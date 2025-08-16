@@ -247,4 +247,23 @@ body {
   }
 }
 
+@keyframes gradientShift {
+  0% {
+    background: linear-gradient(45deg, #FF1493, #00C7DB, #FFE645, #FF1493);
+  }
+  25% {
+    background: linear-gradient(45deg, #00C7DB, #FFE645, #FF1493, #00C7DB);
+  }
+  50% {
+    background: linear-gradient(45deg, #FFE645, #FF1493, #00C7DB, #FFE645);
+  }
+  75% {
+    background: linear-gradient(45deg, #FF1493, #00C7DB, #FFE645, #FF1493);
+  }
 
+}
+
+.App{
+  position: absolute;
+  z-index: 20;
+}

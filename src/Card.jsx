@@ -1,10 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Swiper from 'swiper';
 import 'swiper/swiper-bundle.css';
 import './Card.css'; 
 import cardImage from "../public/WhatsApp Image 2025-08-16 at 18.24.35_171028d0.jpg"
 
 const CardSlider = () => {
+  const [currentSlide, setCurrentSlide] = useState(1);
+  const totalSlides = 2; // Set this to your actual number of slides
+
   useEffect(() => {
     const swiper = new Swiper(".swiper", {
       direction: "horizontal",
@@ -21,6 +24,12 @@ const CardSlider = () => {
           slidesPerView: 1,
           spaceBetween: 40,
         }
+      },
+      on: {
+        slideChange: function() {
+          // Update current slide number (adding 1 because slide index starts at 0)
+          setCurrentSlide(this.realIndex + 1);
+        },
       },
     });
 
@@ -90,6 +99,22 @@ const CardSlider = () => {
             </div>
           </div>
         </div>
+      </div>
+      
+      {/* Page indicator */}
+      <div style={{
+        position: 'fixed',
+        bottom: '20px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        color: 'white',
+        fontSize: '1rem',
+        zIndex: 10,
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        padding: '5px 15px',
+        borderRadius: '20px'
+      }}>
+        Page {currentSlide} of {totalSlides}
       </div>
     </div>
   );
