@@ -1,51 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import Swiper from 'swiper';
-import 'swiper/swiper-bundle.css';
+import React, { useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 import './card.css';
 
-import cardImage from "../public/WhatsApp Image 2025-08-16 at 18.24.35_171028d0.jpg"
+import cardImage from "../public/WhatsApp Image 2025-08-16 at 18.24.35_171028d0.jpg";
 
 const CardSlider = () => {
   const [currentSlide, setCurrentSlide] = useState(1);
-  const totalSlides = 2; // Set this to your actual number of slides
-
-  useEffect(() => {
-    const swiper = new Swiper(".swiper", {
-      direction: "horizontal",
-      loop: true,
-      autoHeight: false,
-      centeredSlides: true,
-      slidesPerView: 1,
-      breakpoints: {
-        640: {
-          slidesPerView: 1,
-          spaceBetween: 40,
-        },
-        992: {
-          slidesPerView: 1,
-          spaceBetween: 40,
-        }
-      },
-      on: {
-        slideChange: function() {
-          // Update current slide number (adding 1 because slide index starts at 0)
-          setCurrentSlide(this.realIndex + 1);
-        },
-      },
-    });
-
-    return () => {
-      swiper.destroy();
-    };
-  }, []);
+  const totalSlides = 2;
 
   return (
     <div className="wrapper">
-      <div className="swiper">
-        <div className="swiper-wrapper">
-          {/* First Slide */}
-          <div className="swiper-slide bg">
-            <div className="pyro left">
+      <Swiper
+        modules={[Navigation, Pagination]}
+        spaceBetween={40}
+        slidesPerView={1}
+        centeredSlides={true}
+        speed={500}
+        loop={true}
+        grabCursor={true}
+        navigation={true}
+        pagination={{
+          type: 'fraction',
+          el: '.swiper-pagination',
+          clickable: true,
+        }}
+        onSlideChange={(swiper) => setCurrentSlide(swiper.realIndex + 1)}
+        onInit={(swiper) => setCurrentSlide(swiper.realIndex + 1)}
+      >
+        {/* First Slide */}
+        <SwiperSlide className="bg">
+          {/* Your slide content */}
+          <div className="pyro left">
               <div className="before"></div>
               <div className="after"></div>
             </div>
@@ -75,11 +64,13 @@ const CardSlider = () => {
                 </div>
               </div>
             </section>
-          </div>
 
-          {/* Second Slide */}
-          <div className="swiper-slide">
-            <div className="pyro left">
+        </SwiperSlide>
+
+        {/* Second Slide */}
+        <SwiperSlide>
+          {/* Your slide content */}
+          <div className="pyro left">
               <div className="before"></div>
               <div className="after"></div>
             </div>
@@ -98,27 +89,20 @@ const CardSlider = () => {
                 <p className="cite">- Katie Kookaburra, Cyclist</p>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-      
-      {/* Page indicator */}
-      <div style={{
-        position: 'fixed',
-        bottom: '20px',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        color: 'white',
-        fontSize: '1rem',
-        zIndex: 10,
-        backgroundColor: 'rgba(0,0,0,0.5)',
-        padding: '5px 15px',
-        borderRadius: '20px'
-      }}>
-        Page {currentSlide} of {totalSlides}
-      </div>
+        </SwiperSlide>
+      </Swiper>
+
+      {/* Custom pagination */}
+      <div className="swiper-pagination"></div>
     </div>
   );
 };
 
 export default CardSlider;
+
+
+
+
+
+
+

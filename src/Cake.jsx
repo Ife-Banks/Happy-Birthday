@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const CakeWithSoundDetection = () => {
   const [showPermissionDialog, setShowPermissionDialog] = useState(true);
@@ -41,12 +42,11 @@ const CakeWithSoundDetection = () => {
     if (flameRef.current) {
       flameRef.current.style.display = 'none';
     }
-    // Redirect only if we haven't already
     if (!hasRedirectedRef.current) {
       hasRedirectedRef.current = true;
       setTimeout(() => {
         navigate('/card');
-      }, 1000); // 1 second delay before redirect
+      }, 1000);
     }
   };
 
@@ -129,7 +129,6 @@ const CakeWithSoundDetection = () => {
     meterRef.current = createAudioMeter(audioContext, CLIP_LEVEL, AVERAGING, CLIP_LAG);
     mediaStreamSourceRef.current.connect(meterRef.current);
 
-    // Start the animation frame loop
     const onLevelChange = () => {
       rafIdRef.current = requestAnimationFrame(onLevelChange);
     };
@@ -147,7 +146,7 @@ const CakeWithSoundDetection = () => {
 
   const startListening = () => {
     setShowPermissionDialog(false);
-    hasRedirectedRef.current = false; // Reset the redirect flag
+    hasRedirectedRef.current = false;
     
     const canvas = canvasRef.current;
     if (canvas) {
@@ -186,22 +185,29 @@ const CakeWithSoundDetection = () => {
   return (
     <div className='bro'>
       {showPermissionDialog && (
-        <div className="permission-dialog" style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor: 'rgba(0,0,0,0.8)',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          zIndex: 1000,
-          color: 'white',
-          textAlign: 'center',
-          padding: '20px'
-        }}>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.8 }}
+          transition={{ duration: 0.3 }}
+          className="permission-dialog"
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0,0,0,0.8)',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 1000,
+            color: 'white',
+            textAlign: 'center',
+            padding: '20px'
+          }}
+        >
           <h2>Microphone Access Required</h2>
           <p style={{ fontSize: '1.2rem', margin: '20px 0' }}>
             To blow out the candle, we need access to your microphone.
@@ -240,11 +246,24 @@ const CakeWithSoundDetection = () => {
               Deny
             </button>
           </div>
-        </div>
+        </motion.div>
       )}
 
-      <h1 className='text'>{displayText}</h1>
-      <div className="cake">
+      <motion.h1 
+        className='text'
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        {displayText}
+      </motion.h1>
+
+      <motion.div
+        initial={{ y: 50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.5, duration: 1 }}
+        className="cake"
+      >
         <div className="plate"></div>
         <div className="layer layer-bottom"></div>
         <div className="layer layer-middle"></div>
@@ -254,20 +273,33 @@ const CakeWithSoundDetection = () => {
         <div className="drip drip2"></div>
         <div className="drip drip3"></div>
         <div className="candle">
-            <div className="flame" ref={flameRef}></div>
+          <motion.div 
+            className="flame" 
+            ref={flameRef}
+            initial={{ opacity: 1 }}
+            animate={{
+              scale: [1, 1.1, 1],
+              opacity: [0.8, 1, 0.8],
+            }}
+            transition={{
+              duration: 1,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
         </div>
-      </div>
+      </motion.div>
 
       {permissionGranted && (
-        <>
-          <canvas 
-            id="meter" 
-            width="500" 
-            height="50"
-            ref={canvasRef}
-          ></canvas>
-
-        </>
+        <motion.canvas
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          id="meter" 
+          width="500" 
+          height="50"
+          ref={canvasRef}
+        />
       )}
     </div>
   );

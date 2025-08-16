@@ -56,7 +56,7 @@ function App() {
 
       <audio 
         ref={audioRef}
-        src="../public" 
+        src="../public/Walking_By_Faith(256k).mp3" 
         loop
         preload="auto"
       />
