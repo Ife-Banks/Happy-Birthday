@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import CakeWithSoundDetection from './Cake';
-import CardSlider from './Card';
+import CardSlider from '../src/Card';
 
 function App() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -42,9 +42,10 @@ function App() {
         <button 
           onClick={togglePlay}
           style={{
-            backgroundColor:'transparent',
+            padding: '10px 10px',
+            borderRadius: '50%',
             border: 'none',
-            
+            background: isPlaying ? '#ff4d4d' : '#4CAF50',
             color: 'white',
             cursor: 'pointer'
           }}
@@ -55,7 +56,7 @@ function App() {
 
       <audio 
         ref={audioRef}
-        src="../public/Walking_By_Faith(256k).mp3" 
+        src="../public" 
         loop
         preload="auto"
       />
