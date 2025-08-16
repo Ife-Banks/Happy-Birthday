@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Swiper from 'swiper';
 import 'swiper/swiper-bundle.css';
-import './Card.css'; 
+import '../public/card.css';
+
 import cardImage from "../public/WhatsApp Image 2025-08-16 at 18.24.35_171028d0.jpg"
 
 const CardSlider = () => {
