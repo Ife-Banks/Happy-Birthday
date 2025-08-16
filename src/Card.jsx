@@ -43,7 +43,7 @@ const CardSlider = () => {
         touchRatio={0.5}
         touchAngle={45}
         shortSwipes={false}
-        longSwipes={false}
+        longSwipes={true}
         threshold={15}
         followFinger={true}
         resistance={true}
