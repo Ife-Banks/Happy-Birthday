@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
@@ -11,27 +11,50 @@ import cardImage from "../public/WhatsApp Image 2025-08-16 at 18.24.35_171028d0.
 const CardSlider = () => {
   const [currentSlide, setCurrentSlide] = useState(1);
   const totalSlides = 2;
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <div className="wrapper">
       <Swiper
         modules={[Navigation, Pagination]}
-        spaceBetween={40}
+        spaceBetween={isMobile ? 20 : 40}
         slidesPerView={1}
         centeredSlides={true}
         speed={500}
         loop={true}
         grabCursor={true}
-        navigation={true}
+        navigation={!isMobile} // Hide arrows on mobile
         pagination={{
           type: 'fraction',
           el: '.swiper-pagination',
           clickable: true,
         }}
+        // Touch improvements
+        touchRatio={0.5}
+        touchAngle={45}
+        shortSwipes={false}
+        longSwipes={false}
+        threshold={15}
+        followFinger={true}
+        resistance={true}
+        resistanceRatio={0.4}
+        touchStartPreventDefault={!isMobile}
+        edgeSwipeDetection={isMobile}
+        edgeSwipeThreshold={20}
         onSlideChange={(swiper) => setCurrentSlide(swiper.realIndex + 1)}
         onInit={(swiper) => setCurrentSlide(swiper.realIndex + 1)}
       >
-        {/* First Slide */}
+        {/* Your slides */}
         <SwiperSlide className="bg">
           {/* Your slide content */}
           <div className="pyro left">
@@ -90,9 +113,11 @@ const CardSlider = () => {
               </div>
             </div>
         </SwiperSlide>
-      </Swiper>
 
-      {/* Custom pagination */}
+
+
+      </Swiper>
+      
       <div className="swiper-pagination"></div>
     </div>
   );
@@ -103,6 +128,4 @@ export default CardSlider;
 
 
 
-
-
-
+ 

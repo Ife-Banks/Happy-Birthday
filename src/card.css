@@ -21,8 +21,9 @@
         }
 
         .swiper {
-  width: 100%;
+  width: 95%;
   height: 100%;
+   -webkit-tap-highlight-color: transparent; /* Removes blue tap highlight on iOS */
 }
 
 .swiper-slide {
@@ -30,6 +31,12 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
+   touch-action: pan-x; /* Improves vertical scrolling within slides */
+  user-select: none; /* Prevents text selection during swipe */
+}
+.swiper-slide-active {
+  transition: transform 0.3s ease;
+    transform: scale(0.98);
 }
 
 .swiper-pagination {
