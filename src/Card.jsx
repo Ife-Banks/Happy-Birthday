@@ -16,7 +16,7 @@ const CardSlider = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [displayText, setDisplayText] = useState('');
   const fullText = `Happy Birthday, Chidi 🎉💛.
-I'm so grateful for the gift of your life and for all the love, kindness, and support you've shown me. You've been more than a friend—you've been a blessing, a confidant, and a source of joy. Your presence in my life reminds me of the beauty of true friendship.
+I'm so grateful for the gift of your life and for all the love, kindness, and support you've shown me. You've been more than a friend.You've been a blessing, a confidant, and a source of joy. Your presence in my life reminds me of the beauty of true friendship.
 
 "A sweet friendship refreshes the soul." Proverbs 27:9 💐
 May God continue to bless you, keep you, and make you shine even brighter in the years ahead.
