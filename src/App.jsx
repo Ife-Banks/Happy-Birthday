@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import CakeWithSoundDetection from './Cake';
 import CardSlider from '../src/Card';
+import audiosrc from '../public/solemn.MP3'
 
 function App() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -56,7 +57,7 @@ function App() {
 
       <audio 
         ref={audioRef}
-        src="../public/Walking_By_Faith(256k).mp3" 
+        src={audiosrc} 
         loop
         preload="auto"
       />
