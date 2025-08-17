@@ -22,7 +22,7 @@
 
         .swiper {
   width: 95%;
-  height: 100%;
+  height: 90%;
    -webkit-tap-highlight-color: transparent; /* Removes blue tap highlight on iOS */
 }
 
@@ -54,7 +54,7 @@
 }
         /* First Slide Styles */
         .bg {
-            background: 
+  background: 
     radial-gradient(circle at 10% 20%, 
       rgba(253, 190, 32, 0.8) 0%, 
       rgba(255, 105, 0, 0.5) 20%,
@@ -67,36 +67,82 @@
       rgba(0, 199, 219, 0.4) 0%, 
       transparent 40%),
     linear-gradient(135deg,
-      #FDBE20 0%,
+      #FF1493 0%,
       #FF8C00 25%,
       #FFE645 50%,
-      #FF1493 75%,
-      #00C7DB 100%);
-        background-blend-mode: overlay, screen, normal, normal;
-        animation: gradientShift 15s ease infinite alternate;
-        border-radius: 15px;
-        position: relative;
-        overflow: hidden;
-        }
+      #FDBE20 75%);
+  
+  background-blend-mode: overlay, screen, normal, normal;
+  background-size: 200% 200%;
+  animation: 
+    gradientShift 20s ease infinite alternate,
+    pulse 15s ease infinite alternate;
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+}
 
+/* Enhanced gradient animation */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 0%;
+  }
+  25% {
+    background-position: 100% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  75% {
+    background-position: 0% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
 
-                    @keyframes gradientShift {
-            0% {
-                background-position: 0% 0%;
-            }
-            25% {
-                background-position: 100% 0%;
-            }
-            50% {
-                background-position: 100% 100%;
-            }
-            75% {
-                background-position: 0% 100%;
-            }
-            100% {
-                background-position: 0% 0%;
-            }
-            }
+/* Additional pulse effect for depth */
+@keyframes pulse {
+  0% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.01);
+  }
+  100% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+}
+
+/* Optional shimmer effect */
+.bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.1) 50%,
+    rgba(255,255,255,0) 100%
+  );
+  animation: shimmer 8s linear infinite;
+  z-index: 1;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
 
         /* Firework Explosion Effect */
         .pyro {
@@ -212,6 +258,8 @@
 
         .mauto {
             margin: auto;
+            width: 90%;
+
         }
 
         /* Image Container Styles */
@@ -223,31 +271,51 @@
             margin: auto;
             padding-top: 50px;
             padding-left: 5px;
-            padding:5px 0px ;
+            padding:0px 0px ;
             border: 10px solid #ffffff;
             border-radius: 10px;
-            margin-bottom: 50px;
+            margin-bottom: 0px;
+            
             
         }
 
+        .p-text{
+            position: absolute;
+            top: 2em;
+            left: 5%;
+            transform: translateX(-50%);
+            color: black;
+            font-size: 1.2rem;
+            margin: auto;
+            width: 90%;
+            padding: 10px;
+            display: flex;
+            place-self: top;
+            text-align: justify;
+            text-shadow: #f5f5f5 0px 0px 10px;
+            line-height: 1.6;
+        }
         .imgset {
     position: relative;
     z-index: 10;
-    margin-bottom: -230px; /* Increased from -210px to accommodate taller image */
+    margin-bottom: -250px; /* Increased from -210px to accommodate taller image */
     display: flex;
+
 }
 
         .imgset img {
     width: auto; /* Change from 90% */
     max-width: 100%;
-    height: 300px;
+    height: 325px;
     object-fit: cover; /* Change from cover to show full image */
-    border: 1px solid black;
+    
     margin: auto;
     text-align: center;
     box-shadow: 0px 6px 11px 7px rgba(0, 0, 0, 0.22);
     border-radius: 5px;
     z-index: 2;
+            
+
 }
 
         /* Card Styles */
